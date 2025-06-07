@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { User, Calendar, MapPin, Phone, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -10,7 +9,7 @@ const DoctorsPage: React.FC = () => {
   const doctor = {
     name: 'Dr. Sarah Johnson',
     specialty: 'Pediatrician',
-    hospital: 'Children's Medical Center',
+    hospital: 'Children\'s Medical Center',
     address: '123 Healthcare Blvd, Medical District',
     phone: '+1 (555) 123-4567',
     rating: 4.9,
