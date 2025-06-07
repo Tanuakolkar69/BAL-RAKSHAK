@@ -26,13 +26,13 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
             <button
               key={tab.id}
               onClick={() => onTabChange(tab.id)}
-              className={`flex flex-col items-center py-2 px-3 rounded-2xl transition-all duration-200 ${
+              className={`flex flex-col items-center py-2 px-3 rounded-2xl transition-all duration-200 hover:scale-105 ${
                 isActive
                   ? 'bg-gradient-to-br from-purple-100 to-pink-100 text-purple-600'
                   : 'text-gray-500 hover:text-gray-700'
               }`}
             >
-              <div className={`p-2 rounded-xl ${isActive ? 'bg-white shadow-sm' : ''}`}>
+              <div className={`p-2 rounded-xl transition-all duration-200 ${isActive ? 'bg-white shadow-sm' : ''}`}>
                 <Icon size={20} />
               </div>
               <span className="text-xs font-medium mt-1">{tab.label}</span>

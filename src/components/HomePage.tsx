@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Calendar, CheckCircle, Clock, User } from 'lucide-react';
 
@@ -7,24 +6,93 @@ interface HomePageProps {
 }
 
 const HomePage: React.FC<HomePageProps> = ({ babyData }) => {
-  // Updated vaccine data based on IAP Immunization Timetable (2020-21)
-  const upcomingVaccines = [
-    { name: 'DTP-1 (6 Weeks)', date: '2025-01-26', age: '6 weeks', mandatory: true },
-    { name: 'IPV-1 (6 Weeks)', date: '2025-01-27', age: '6 weeks', mandatory: true },
-    { name: 'Hepatitis B-2 (6 Weeks)', date: '2025-01-28', age: '6 weeks', mandatory: true },
-    { name: 'Hib-1 (6 Weeks)', date: '2025-01-29', age: '6 weeks', mandatory: true },
-  ];
+  // Calculate baby's age in weeks based on DOB
+  const calculateAgeInWeeks = (dob: string) => {
+    const birthDate = new Date(dob);
+    const today = new Date();
+    const diffTime = Math.abs(today.getTime() - birthDate.getTime());
+    const diffWeeks = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
+    return diffWeeks;
+  };
 
-  const completedVaccines = [
-    { name: 'BCG (At Birth)', date: '2024-12-15', hospital: 'General Hospital', mandatory: true },
-    { name: 'Hepatitis B-1 (At Birth)', date: '2024-12-16', hospital: 'General Hospital', mandatory: true },
-    { name: 'OPV-0 (At Birth)', date: '2024-12-17', hospital: 'General Hospital', mandatory: true },
-  ];
+  const babyAgeWeeks = babyData?.dateOfBirth ? calculateAgeInWeeks(babyData.dateOfBirth) : 0;
+
+  // IAP 2020-21 Official Vaccine Schedule
+  const getVaccineSchedule = (dobString: string) => {
+    const dob = new Date(dobString);
+    
+    const addWeeks = (date: Date, weeks: number) => {
+      const result = new Date(date);
+      result.setDate(result.getDate() + (weeks * 7));
+      return result;
+    };
+
+    const addMonths = (date: Date, months: number) => {
+      const result = new Date(date);
+      result.setMonth(result.getMonth() + months);
+      return result;
+    };
+
+    const addYears = (date: Date, years: number) => {
+      const result = new Date(date);
+      result.setFullYear(result.getFullYear() + years);
+      return result;
+    };
+
+    return [
+      // Birth vaccines
+      { name: 'BCG', age: 'At Birth', dueDate: dob, mandatory: true, status: 'completed' },
+      { name: 'Hepatitis B-1', age: 'At Birth', dueDate: dob, mandatory: true, status: 'completed' },
+      { name: 'OPV-0', age: 'At Birth', dueDate: dob, mandatory: true, status: 'completed' },
+      
+      // 6 weeks vaccines
+      { name: 'DTP-1', age: '6 Weeks', dueDate: addWeeks(dob, 6), mandatory: true, status: babyAgeWeeks >= 6 ? 'completed' : 'upcoming' },
+      { name: 'IPV-1', age: '6 Weeks', dueDate: addWeeks(dob, 6), mandatory: true, status: babyAgeWeeks >= 6 ? 'completed' : 'upcoming' },
+      { name: 'Hepatitis B-2', age: '6 Weeks', dueDate: addWeeks(dob, 6), mandatory: true, status: babyAgeWeeks >= 6 ? 'completed' : 'upcoming' },
+      { name: 'Hib-1', age: '6 Weeks', dueDate: addWeeks(dob, 6), mandatory: true, status: babyAgeWeeks >= 6 ? 'completed' : 'upcoming' },
+      { name: 'Rotavirus-1', age: '6 Weeks', dueDate: addWeeks(dob, 6), mandatory: true, status: babyAgeWeeks >= 6 ? 'completed' : 'upcoming' },
+      { name: 'PCV-1', age: '6 Weeks', dueDate: addWeeks(dob, 6), mandatory: true, status: babyAgeWeeks >= 6 ? 'completed' : 'upcoming' },
+      
+      // 10 weeks vaccines
+      { name: 'DTP-2', age: '10 Weeks', dueDate: addWeeks(dob, 10), mandatory: true, status: babyAgeWeeks >= 10 ? 'completed' : 'upcoming' },
+      { name: 'IPV-2', age: '10 Weeks', dueDate: addWeeks(dob, 10), mandatory: true, status: babyAgeWeeks >= 10 ? 'completed' : 'upcoming' },
+      { name: 'Hib-2', age: '10 Weeks', dueDate: addWeeks(dob, 10), mandatory: true, status: babyAgeWeeks >= 10 ? 'completed' : 'upcoming' },
+      { name: 'Rotavirus-2', age: '10 Weeks', dueDate: addWeeks(dob, 10), mandatory: true, status: babyAgeWeeks >= 10 ? 'completed' : 'upcoming' },
+      { name: 'PCV-2', age: '10 Weeks', dueDate: addWeeks(dob, 10), mandatory: true, status: babyAgeWeeks >= 10 ? 'completed' : 'upcoming' },
+      
+      // 14 weeks vaccines
+      { name: 'DTP-3', age: '14 Weeks', dueDate: addWeeks(dob, 14), mandatory: true, status: babyAgeWeeks >= 14 ? 'completed' : 'upcoming' },
+      { name: 'IPV-3', age: '14 Weeks', dueDate: addWeeks(dob, 14), mandatory: true, status: babyAgeWeeks >= 14 ? 'completed' : 'upcoming' },
+      { name: 'Hib-3', age: '14 Weeks', dueDate: addWeeks(dob, 14), mandatory: true, status: babyAgeWeeks >= 14 ? 'completed' : 'upcoming' },
+      { name: 'Rotavirus-3', age: '14 Weeks', dueDate: addWeeks(dob, 14), mandatory: true, status: babyAgeWeeks >= 14 ? 'completed' : 'upcoming' },
+      { name: 'PCV-3', age: '14 Weeks', dueDate: addWeeks(dob, 14), mandatory: true, status: babyAgeWeeks >= 14 ? 'completed' : 'upcoming' },
+      
+      // 6 months vaccines
+      { name: 'Hepatitis B-3', age: '6 Months', dueDate: addMonths(dob, 6), mandatory: true, status: 'upcoming' },
+      { name: 'Influenza-1', age: '6 Months', dueDate: addMonths(dob, 6), mandatory: false, status: 'upcoming' },
+      
+      // 9 months vaccines
+      { name: 'MMR-1', age: '9 Months', dueDate: addMonths(dob, 9), mandatory: true, status: 'upcoming' },
+      { name: 'Typhoid Conjugate Vaccine', age: '9-12 Months', dueDate: addMonths(dob, 9), mandatory: true, status: 'upcoming' },
+    ];
+  };
+
+  const vaccines = babyData?.dateOfBirth ? getVaccineSchedule(babyData.dateOfBirth) : [];
+  const completedVaccines = vaccines.filter(v => v.status === 'completed');
+  const upcomingVaccines = vaccines.filter(v => v.status === 'upcoming').slice(0, 4);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-blue-50 to-purple-50 pb-20">
+      {/* App Logo */}
+      <div className="text-center pt-8 pb-4">
+        <h1 className="text-2xl font-black text-gray-800 tracking-wide">
+          BAL - RAKSHAK
+        </h1>
+        <p className="text-xs text-gray-600 font-medium">Baby Health Guardian</p>
+      </div>
+
       {/* Header */}
-      <div className="bg-gradient-to-r from-purple-400 to-pink-400 pt-12 pb-8 px-4">
+      <div className="bg-gradient-to-r from-purple-400 to-pink-400 pt-8 pb-8 px-4">
         <div className="flex items-center justify-between max-w-md mx-auto">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">

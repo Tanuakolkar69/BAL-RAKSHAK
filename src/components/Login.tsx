@@ -24,6 +24,14 @@ const Login: React.FC<LoginProps> = ({ onLogin, onSwitchToRegister }) => {
   return (
     <div className="min-h-screen flex items-center justify-center p-4 baby-gradient">
       <div className="w-full max-w-md">
+        {/* App Logo */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-black text-gray-800 tracking-wide mb-2">
+            BAL - RAKSHAK
+          </h1>
+          <p className="text-sm text-gray-600 font-medium">Baby Health Guardian</p>
+        </div>
+
         {/* Floating baby illustration */}
         <div className="text-center mb-8">
           <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-pink-200 to-purple-200 rounded-full flex items-center justify-center animate-float">
@@ -34,7 +42,7 @@ const Login: React.FC<LoginProps> = ({ onLogin, onSwitchToRegister }) => {
         {/* Login Card */}
         <div className="baby-card animate-fade-in">
           <div className="text-center mb-6">
-            <h1 className="text-2xl font-bold text-gray-800 mb-2">Sign in</h1>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">Sign in</h2>
             <p className="text-gray-600">Log in to access your account</p>
           </div>
 
@@ -49,7 +57,7 @@ const Login: React.FC<LoginProps> = ({ onLogin, onSwitchToRegister }) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="example@gmail.com"
-                className="mt-1 rounded-2xl border-gray-200 focus:border-purple-300 focus:ring-purple-200"
+                className="mt-1 rounded-2xl border-gray-200 focus:border-purple-300 focus:ring-purple-200 text-gray-900"
                 required
               />
             </div>
@@ -64,7 +72,7 @@ const Login: React.FC<LoginProps> = ({ onLogin, onSwitchToRegister }) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="mt-1 rounded-2xl border-gray-200 focus:border-purple-300 focus:ring-purple-200"
+                className="mt-1 rounded-2xl border-gray-200 focus:border-purple-300 focus:ring-purple-200 text-gray-900"
                 required
               />
             </div>
@@ -82,7 +90,7 @@ const Login: React.FC<LoginProps> = ({ onLogin, onSwitchToRegister }) => {
 
             <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-2xl py-3 font-medium transition-all duration-200 shadow-lg hover:shadow-xl"
+              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-2xl py-3 font-medium transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105"
             >
               Sign in
             </Button>
@@ -101,13 +109,13 @@ const Login: React.FC<LoginProps> = ({ onLogin, onSwitchToRegister }) => {
             <div className="mt-4 grid grid-cols-2 gap-3">
               <Button
                 variant="outline"
-                className="rounded-2xl border-gray-200 hover:bg-gray-50 text-black"
+                className="rounded-2xl border-gray-200 hover:bg-gray-50 text-gray-900 transition-all duration-200 hover:scale-105"
               >
                 🌟 Google
               </Button>
               <Button
                 variant="outline"
-                className="rounded-2xl border-gray-200 hover:bg-gray-50 text-black"
+                className="rounded-2xl border-gray-200 hover:bg-gray-50 text-gray-900 transition-all duration-200 hover:scale-105"
               >
                 🍎 Apple
               </Button>
@@ -118,7 +126,7 @@ const Login: React.FC<LoginProps> = ({ onLogin, onSwitchToRegister }) => {
             <span className="text-gray-600">Don't have an account? </span>
             <button
               onClick={onSwitchToRegister}
-              className="text-purple-600 hover:text-purple-700 font-medium transition-colors"
+              className="text-purple-600 hover:text-purple-700 font-medium transition-all duration-200 hover:scale-105"
             >
               Register your baby
             </button>

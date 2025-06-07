@@ -56,6 +56,22 @@
     @apply bg-gradient-to-br from-pink-50 via-blue-50 to-purple-50 text-foreground font-sans;
     min-height: 100vh;
   }
+
+  /* Global button hover animations */
+  button {
+    @apply transition-all duration-200 ease-in-out;
+  }
+
+  button:hover {
+    @apply transform scale-105;
+  }
+
+  /* Specific styling for input elements */
+  input[type="email"],
+  input[type="password"],
+  input[type="text"] {
+    @apply text-gray-900;
+  }
 }
 
 @layer utilities {
