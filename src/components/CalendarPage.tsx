@@ -63,13 +63,13 @@ const CalendarPage: React.FC = () => {
   const getEventTypeColor = (type: string) => {
     switch (type) {
       case 'completed':
-        return 'bg-green-100 border-green-300 text-green-700';
+        return 'bg-green-200 border-green-400 text-black';
       case 'upcoming':
-        return 'bg-blue-100 border-blue-300 text-blue-700';
+        return 'bg-blue-200 border-blue-400 text-black';
       case 'overdue':
-        return 'bg-red-100 border-red-300 text-red-700';
+        return 'bg-red-200 border-red-400 text-black';
       default:
-        return 'bg-gray-100 border-gray-300 text-gray-700';
+        return 'bg-gray-100 border-gray-300 text-black';
     }
   };
 
@@ -122,7 +122,7 @@ const CalendarPage: React.FC = () => {
           {/* Days of week header */}
           <div className="grid grid-cols-7 gap-2 mb-4">
             {daysOfWeek.map(day => (
-              <div key={day} className="text-center text-sm font-medium text-gray-600 py-2">
+              <div key={day} className="text-center text-sm font-medium text-black py-2">
                 {day}
               </div>
             ))}
@@ -143,15 +143,15 @@ const CalendarPage: React.FC = () => {
               return (
                 <div
                   key={day}
-                  className={`h-12 rounded-xl flex flex-col items-center justify-center text-sm transition-all cursor-pointer
+                  className={`h-12 rounded-xl flex flex-col items-center justify-center text-sm transition-all cursor-pointer border-2
                     ${isToday 
-                      ? 'bg-purple-500 text-white font-semibold' 
+                      ? 'bg-purple-500 text-white font-semibold border-purple-600' 
                       : event 
-                        ? getEventTypeColor(event.type)
-                        : 'hover:bg-gray-50'
+                        ? `${getEventTypeColor(event.type)} border-2`
+                        : 'hover:bg-gray-50 text-black border-transparent'
                     }`}
                 >
-                  <span className={`${isToday ? 'text-white' : ''}`}>{day}</span>
+                  <span className={`font-medium ${isToday ? 'text-white' : 'text-black'}`}>{day}</span>
                   {event && !isToday && (
                     <div className="mt-1">
                       {getEventIcon(event.type)}
@@ -168,15 +168,15 @@ const CalendarPage: React.FC = () => {
           <h3 className="text-lg font-semibold text-gray-800 mb-4">Legend</h3>
           <div className="space-y-2">
             <div className="flex items-center space-x-3">
-              <div className="w-4 h-4 bg-green-200 border border-green-300 rounded"></div>
+              <div className="w-4 h-4 bg-green-200 border border-green-400 rounded"></div>
               <span className="text-sm text-gray-700">Completed vaccines</span>
             </div>
             <div className="flex items-center space-x-3">
-              <div className="w-4 h-4 bg-blue-200 border border-blue-300 rounded"></div>
+              <div className="w-4 h-4 bg-blue-200 border border-blue-400 rounded"></div>
               <span className="text-sm text-gray-700">Upcoming vaccines</span>
             </div>
             <div className="flex items-center space-x-3">
-              <div className="w-4 h-4 bg-red-200 border border-red-300 rounded"></div>
+              <div className="w-4 h-4 bg-red-200 border border-red-400 rounded"></div>
               <span className="text-sm text-gray-700">Overdue vaccines</span>
             </div>
           </div>

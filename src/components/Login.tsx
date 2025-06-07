@@ -101,13 +101,13 @@ const Login: React.FC<LoginProps> = ({ onLogin, onSwitchToRegister }) => {
             <div className="mt-4 grid grid-cols-2 gap-3">
               <Button
                 variant="outline"
-                className="rounded-2xl border-gray-200 hover:bg-gray-50"
+                className="rounded-2xl border-gray-200 hover:bg-gray-50 text-black"
               >
                 🌟 Google
               </Button>
               <Button
                 variant="outline"
-                className="rounded-2xl border-gray-200 hover:bg-gray-50"
+                className="rounded-2xl border-gray-200 hover:bg-gray-50 text-black"
               >
                 🍎 Apple
               </Button>
