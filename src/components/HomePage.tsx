@@ -7,13 +7,18 @@ interface HomePageProps {
 }
 
 const HomePage: React.FC<HomePageProps> = ({ babyData }) => {
+  // Updated vaccine data based on IAP Immunization Timetable (2020-21)
   const upcomingVaccines = [
-    { name: 'Hepatitis B', date: '2025-01-15', age: '2 months' },
-    { name: 'DTaP', date: '2025-02-10', age: '3 months' },
+    { name: 'DTP-1 (6 Weeks)', date: '2025-01-26', age: '6 weeks', mandatory: true },
+    { name: 'IPV-1 (6 Weeks)', date: '2025-01-27', age: '6 weeks', mandatory: true },
+    { name: 'Hepatitis B-2 (6 Weeks)', date: '2025-01-28', age: '6 weeks', mandatory: true },
+    { name: 'Hib-1 (6 Weeks)', date: '2025-01-29', age: '6 weeks', mandatory: true },
   ];
 
   const completedVaccines = [
-    { name: 'Hepatitis B (Birth)', date: '2024-12-15', hospital: 'General Hospital' },
+    { name: 'BCG (At Birth)', date: '2024-12-15', hospital: 'General Hospital', mandatory: true },
+    { name: 'Hepatitis B-1 (At Birth)', date: '2024-12-16', hospital: 'General Hospital', mandatory: true },
+    { name: 'OPV-0 (At Birth)', date: '2024-12-17', hospital: 'General Hospital', mandatory: true },
   ];
 
   return (
@@ -52,6 +57,7 @@ const HomePage: React.FC<HomePageProps> = ({ babyData }) => {
               <h2 className="text-lg font-semibold text-gray-800">{babyData?.babyName || 'Baby Name'}</h2>
               <p className="text-gray-600">{babyData?.babyId || 'HS-BB-12345'}</p>
               <p className="text-sm text-gray-500">Born: {babyData?.dateOfBirth || '2024-12-15'}</p>
+              <p className="text-xs text-purple-600">Following IAP 2020-21 Schedule</p>
             </div>
           </div>
         </div>
@@ -63,23 +69,23 @@ const HomePage: React.FC<HomePageProps> = ({ babyData }) => {
               <CheckCircle size={20} className="text-green-600" />
               <span className="text-sm font-medium text-green-800">Completed</span>
             </div>
-            <p className="text-2xl font-bold text-green-700">1</p>
-            <p className="text-xs text-green-600">vaccines</p>
+            <p className="text-2xl font-bold text-green-700">3</p>
+            <p className="text-xs text-green-600">vaccines (Birth)</p>
           </div>
           
           <div className="bg-gradient-to-br from-orange-100 to-amber-100 rounded-3xl p-4">
             <div className="flex items-center space-x-2 mb-2">
               <Clock size={20} className="text-orange-600" />
-              <span className="text-sm font-medium text-orange-800">Upcoming</span>
+              <span className="text-sm font-medium text-orange-800">Next Phase</span>
             </div>
-            <p className="text-2xl font-bold text-orange-700">2</p>
-            <p className="text-xs text-orange-600">vaccines</p>
+            <p className="text-2xl font-bold text-orange-700">6</p>
+            <p className="text-xs text-orange-600">vaccines at 6 weeks</p>
           </div>
         </div>
 
-        {/* Next Vaccines */}
+        {/* Next Vaccines (6 weeks schedule) */}
         <div className="baby-card">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Next Vaccines</h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">Next: 6 Weeks Schedule</h3>
           <div className="space-y-3">
             {upcomingVaccines.map((vaccine, index) => (
               <div key={index} className="flex items-center justify-between p-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl">
@@ -89,7 +95,12 @@ const HomePage: React.FC<HomePageProps> = ({ babyData }) => {
                   </div>
                   <div>
                     <p className="font-medium text-gray-800">{vaccine.name}</p>
-                    <p className="text-sm text-gray-600">Age: {vaccine.age}</p>
+                    <div className="flex items-center space-x-2">
+                      <p className="text-sm text-gray-600">Age: {vaccine.age}</p>
+                      {vaccine.mandatory && (
+                        <span className="text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">Mandatory</span>
+                      )}
+                    </div>
                   </div>
                 </div>
                 <div className="text-right">
@@ -101,9 +112,9 @@ const HomePage: React.FC<HomePageProps> = ({ babyData }) => {
           </div>
         </div>
 
-        {/* Recent Activity */}
+        {/* Recent Activity (Birth vaccines) */}
         <div className="baby-card">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Recent Activity</h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">Completed: Birth Vaccines</h3>
           <div className="space-y-3">
             {completedVaccines.map((vaccine, index) => (
               <div key={index} className="flex items-center space-x-3 p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl">
@@ -116,10 +127,23 @@ const HomePage: React.FC<HomePageProps> = ({ babyData }) => {
                 </div>
                 <div className="text-right">
                   <p className="text-sm text-green-600">{vaccine.date}</p>
+                  <span className="text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Mandatory</span>
                 </div>
               </div>
             ))}
           </div>
+        </div>
+
+        {/* IAP Schedule Info */}
+        <div className="bg-gradient-to-br from-purple-100 to-blue-100 rounded-3xl p-4">
+          <div className="flex items-center space-x-2 mb-3">
+            <span className="text-lg">📋</span>
+            <h3 className="font-semibold text-purple-800">IAP Schedule 2020-21</h3>
+          </div>
+          <p className="text-purple-700 text-sm">
+            Your baby's immunization follows the official Indian Academy of Pediatrics guidelines. 
+            All mandatory vaccines are essential for your baby's health and development.
+          </p>
         </div>
 
         {/* Tip of the Day */}
@@ -129,7 +153,8 @@ const HomePage: React.FC<HomePageProps> = ({ babyData }) => {
             <h3 className="font-semibold text-orange-800">Tip of the Day</h3>
           </div>
           <p className="text-orange-700 text-sm">
-            Keep your baby hydrated after vaccinations. Breast milk or formula helps comfort them and supports their immune response.
+            The 6-week vaccination schedule includes multiple vaccines. Discuss with your pediatrician about 
+            spacing them across a few days to monitor for any reactions.
           </p>
         </div>
       </div>
